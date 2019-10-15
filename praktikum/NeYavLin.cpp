@@ -27,25 +27,17 @@ int max_num_x(double tau, double h, int k) {
 	return num_x;
 }
 
-int main() {
-	std::ofstream out;
-	out.open("out_ny_l.txt");
-	double h, tau;
+void calculate(double h, double tau, double *cur, double *next, std::ofstream &out)
+{
 	double c1;
 	int num_t, num_x;
 	double x;
-	double* cur, * next, * tmp, * cur1;
+	double *tmp;
 	int i, j;
 	double max_delta, sum_delta, abs_max_delta, abs_sum_delta, delta;
-	int k = 2;
-	tau = 0.01;
-	h = 0.01;
+	
 	num_t = (int)(1 / tau);
 	num_x = (int)(2 / h) + 1 + 2 * num_t;
-	cur = (double*)malloc(max_num_x(tau, h, k) * sizeof(double));
-	next = (double*)malloc(max_num_x(tau, h, k) * sizeof(double));
-	cur1 = (double*)malloc(max_num_x(tau, h, k) * sizeof(double));
-
 
 
 	for (i = 0; i < num_x; i++) {
@@ -64,7 +56,7 @@ int main() {
 	for (j = 1; j < num_t; j++)
 	{
 		next[num_x - 1] = 1;
-		for (i = num_x - 2; i >0 ; i--) {
+		for (i = num_x - 2; i > 0; i--) {
 			next[i] = cur[i] + c1 * (cur[i - 1] - next[i + 1]);
 		}
 		tmp = cur;
@@ -76,7 +68,7 @@ int main() {
 	sum_delta = 0;
 	abs_max_delta = 0;
 	abs_sum_delta = 0;
-	
+
 	for (i = num_t; i <= num_x - num_t - 1; i++)
 	{
 		delta = fabs(an_solve_ny(X(i, h, num_t)) - cur[i]);
@@ -96,50 +88,25 @@ int main() {
 	std::cout << max_delta << " " << sum_delta << " " << abs_max_delta << " " << abs_sum_delta << "\n";
 	out << max_delta << " & " << sum_delta << " & " << abs_max_delta << " & " << abs_sum_delta << "\n";
 
-	double tau1 = tau / k;
-	double h1 = h / k;
-	num_t = (int)(1 / tau1);
-	num_x = (int)(2 / h1) + 1 + 2 * num_t;
 
+}
 
-	for (i = 0; i < num_x; i++) {
-		x = X(i, h1, num_t);
-		if (x <= -0.25)
-			cur1[i] = 1;
-		if (-0.25 < x && x <= 0)
-			cur1[i] = -4 * x;
-		if (x > 0)
-			cur1[i] = 0;
-		next[i] = cur1[i];
-	}
+int main() {
+	std::ofstream out;
+	out.open("out_ny_l.txt");
+	double h, tau;
+	int k = 2;
+	tau = 0.01;
+	h = 0.01;
+	double* cur, *next, *cur1;
+	cur = (double*)malloc(max_num_x(tau, h, k) * sizeof(double));
+	next = (double*)malloc(max_num_x(tau, h, k) * sizeof(double));
+	cur1 = (double*)malloc(max_num_x(tau, h, k) * sizeof(double));
 
-	c1 = tau1 / (4 * h1 - tau1);
+	calculate(h, tau, cur, next, out);
 
-	for (j = 1; j < num_t; j++)
-	{
-		next[num_x - 1] = 1;
-		for (i = num_x - 2; i > 0; i--) {
-			next[i] = cur[i] + c1 * (cur[i - 1] - next[i + 1]);
-		}
-		tmp = cur;
-		cur = next;
-		next = tmp;
-	}
-
-	max_delta = 0;
-	abs_max_delta = 0;
-	sum_delta = 0;
-	abs_sum_delta = 0;
-
-	std::cout << X(num_x - 1 - num_t, h1, num_t) << "\n";
-
-	for (i = num_t; i <= num_x - 1 - num_t; i++) {
-		delta = fabs(an_solve_ny(X(i, h1, num_t)) - cur1[i]);
-		out << X(i, h1, num_t) << ";" << cur1[i] << "                      " << delta << "\n";
-
-	}
-
-	num_t = (int)(1 / tau);
+	
+	/*num_t = (int)(1 / tau);
 	num_x = (int)(2 / h) + 1 + 2 * num_t;
 
 	//std::cout << X(num_t+1, h, num_t) << " " << X((num_t+1)*k, h1, (int)1 / tau1) << "\n";
@@ -164,7 +131,7 @@ int main() {
 	std::cout << max_delta << " " << sum_delta << " " << abs_max_delta << " " << abs_sum_delta << "\n";
 	out << max_delta << " & " << sum_delta << " & " << abs_max_delta << " & " << abs_sum_delta << "\n";
 
-
+	*/
 	out.close();
 	free(next);
 	free(cur);
