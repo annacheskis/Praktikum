@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.779
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "praktikum", "praktikum\praktikum.vcxproj", "{27C463FF-BA54-400B-8E96-6CFEBA078F4B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{27C463FF-BA54-400B-8E96-6CFEBA078F4B}.Debug|x64.ActiveCfg = Debug|x64
+		{27C463FF-BA54-400B-8E96-6CFEBA078F4B}.Debug|x64.Build.0 = Debug|x64
+		{27C463FF-BA54-400B-8E96-6CFEBA078F4B}.Debug|x86.ActiveCfg = Debug|Win32
+		{27C463FF-BA54-400B-8E96-6CFEBA078F4B}.Debug|x86.Build.0 = Debug|Win32
+		{27C463FF-BA54-400B-8E96-6CFEBA078F4B}.Release|x64.ActiveCfg = Release|x64
+		{27C463FF-BA54-400B-8E96-6CFEBA078F4B}.Release|x64.Build.0 = Release|x64
+		{27C463FF-BA54-400B-8E96-6CFEBA078F4B}.Release|x86.ActiveCfg = Release|Win32
+		{27C463FF-BA54-400B-8E96-6CFEBA078F4B}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FC412A68-A78A-414D-8304-9938D3F5BA0C}
+	EndGlobalSection
+EndGlobal
