@@ -27,12 +27,12 @@ int max_num_x(double tau, double h, int k) {
 	return num_x;
 }
 
-void calculate(double h, double tau, double *cur, double *next, std::ofstream &out)
+void calculate(double h, double tau, long double *cur, long double *next, std::ofstream &out)
 {
 	double c1;
 	int num_t, num_x;
 	double x;
-	double *tmp;
+	long double *tmp;
 	int i, j;
 	double max_delta, sum_delta, abs_max_delta, abs_sum_delta, delta;
 	
@@ -89,7 +89,7 @@ void calculate(double h, double tau, double *cur, double *next, std::ofstream &o
 	out << max_delta << " & " << sum_delta << " & " << abs_max_delta << " & " << abs_sum_delta << "\n";
 }
 
-void compare(double *cur, double *cur1, int k, std::ofstream &out, double h, double tau) {
+void compare(long double *cur, long double *cur1, int k, std::ofstream &out, double h, double tau) {
 	int i;
 	double max_delta, sum_delta, abs_max_delta, abs_sum_delta, delta;
 	int num_x, num_t;
@@ -123,19 +123,19 @@ void compare(double *cur, double *cur1, int k, std::ofstream &out, double h, dou
 
 }
 
-int main2() {
+int main() {
 	std::ofstream out;
 	out.open("out_ny_l.txt");
 
 	double h, tau;
-	int k = 16;
-	tau = 0.01;
-	h = 0.01;
-	double* cur, *next, *cur1;
+	int k = 4;
+	tau = 0.001;
+	h = 0.001;
+	long double* cur, *next, *cur1;
 
-	cur = (double*)malloc(max_num_x(tau, h, k) * sizeof(double));
-	next = (double*)malloc(max_num_x(tau, h, k) * sizeof(double));
-	cur1 = (double*)malloc(max_num_x(tau, h, k) * sizeof(double));
+	cur = (long double*)malloc(max_num_x(tau, h, k) * sizeof(long double));
+	next = (long double*)malloc(max_num_x(tau, h, k) * sizeof(long double));
+	cur1 = (long double*)malloc(max_num_x(tau, h, k) * sizeof(long double));
 
 	calculate(h, tau, cur, next, out);
 
